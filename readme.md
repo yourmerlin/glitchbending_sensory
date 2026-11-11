@@ -47,6 +47,10 @@ Crete a program where the user uploads an OBJ file(a 3D scan of their body). It 
 
 Important links/info:
 
+https://pixelnoizz.wordpress.com/tag/3d-glitch/
+
+https://www.reddit.com/r/Cinema4D/comments/4723uw/i_decided_to_databend_one_of_my_old_c4d_projects/?solution=18de62e9e3fcaec118de62e9e3fcaec1&js_challenge=1&jsc_token=2824be10929bdc604753c70a67a1c331e90f80af98e4b93105ab829dd0b3a4ea&jsc_orig_r=
+
 Info about how OBJ files format works:
 
 _each file is made up of_
@@ -57,11 +61,42 @@ _each file is made up of_
   - just means the directions it can go on a x/y/x coordinate system
 - vt = vertex textures
   - these are points on a the x/y coordinate system to make up your texture
-- f = faces
-  - it made up of
 
+- f = faces
+  - specification for all faces
+  - there are usually 3 entries, each having 3
+
+f 1/1/1 2/2/1 3/3/1
+first entry = stands for the first vertices entry coordinate
+second entry = stands for first the vertex texture
+last entry = stands for the vertex normal
+
+f [1(row 1 of V)/1(row 1 of VT)/1(row 1 of VN)] = V / VT / VN
+
+each row is 1 triangle
+first letter of each entry -> formation of Vertices (edge)
+second letter of each entry -> formation of the vertices texture (plane)
+last letter of each entry -> formation of the vertices normal (points->vertices)
+
+this process continues based on the given list in each (v,vt,vn) category to form a 3 dimensional form
+
+in opengl, 3 dimensional objections are composed of triangles
+
+
+creating a python pipline
+- have python open obj file as text
+- find (f {#}/{#}/{#}....)
+- insert randomizer to delete an f row
 
 people to contact:
 
-- glitch arts collective 
-- lark vcr 
+- glitch arts collective
+- lark vcr
+
+
+vector module:
+
+euclidean vector
+if we are trying to plot things in 2D, we use x/y || -x/-y coordinate system
+
+
