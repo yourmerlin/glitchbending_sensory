@@ -51,15 +51,17 @@ https://pixelnoizz.wordpress.com/tag/3d-glitch/
 
 https://www.reddit.com/r/Cinema4D/comments/4723uw/i_decided_to_databend_one_of_my_old_c4d_projects/?solution=18de62e9e3fcaec118de62e9e3fcaec1&js_challenge=1&jsc_token=2824be10929bdc604753c70a67a1c331e90f80af98e4b93105ab829dd0b3a4ea&jsc_orig_r=
 
+- https://www.srcxor.org/blog/3d-glitching/
+
 Info about how OBJ files format works:
 
 _each file is made up of_
 
-- v = vertices
+- v = vertices (List of geometric vertices, with (x, y, z, [w]) coordinates, w is optional and defaults to 1.0.)
   - 3 dimensional coordinates of the 8 vertices of thast make up each plane
-- vn = vertex normal
-  - just means the directions it can go on a x/y/x coordinate system
-- vt = vertex textures
+- vn = vertex normal (# List of vertex normals in (x,y,z) form; normals might not be unit vectors.)
+  - just means the directions it can go on a x/y/x coordinate system (direction of where the vertex is pointing to in the x/y/z system)
+- vt = vertex textures (# List of texture coordinates, in (u, [v, w]) coordinates, these will vary between 0 and 1. v, w are optional and default to 0.)
   - these are points on a the x/y coordinate system to make up your texture
 
 - f = faces
@@ -82,8 +84,8 @@ this process continues based on the given list in each (v,vt,vn) category to for
 
 in opengl, 3 dimensional objections are composed of triangles
 
-
 creating a python pipline
+
 - have python open obj file as text
 - find (f {#}/{#}/{#}....)
 - insert randomizer to delete an f row
@@ -93,10 +95,7 @@ people to contact:
 - glitch arts collective
 - lark vcr
 
-
 vector module:
 
 euclidean vector
 if we are trying to plot things in 2D, we use x/y || -x/-y coordinate system
-
-
