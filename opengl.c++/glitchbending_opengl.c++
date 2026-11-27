@@ -35,20 +35,20 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include <learnopengl/mesh.h>
-#include <learnopengl/shader.h>
+#include <shaders/shader.h>
+#include <shaders/glitch.gs>
+#include <shaders/glitch.fs>
+#include <shaders/glitch.vs>
+
 
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <map>
+
 using namespace std;
 
 unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
 
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+// void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 
 // settings for window w/h
@@ -64,55 +64,55 @@ struct Vertex {
 
 // struct to hold the texture data (id, type, path)
 
-struct Texture {
-    unsigned int id;
-    string type;
-    string path;
-}
+// struct Texture {
+//     unsigned int id;
+//     string type;
+//     string path;
+// }
 
-struct Mesh {
-    vector<Vertex> vertices;
-    vector<unsigned int> indices;
-    vector<Texture> textures;
+// struct Mesh {
+//     vector<Vertex> vertices;
+//     vector<unsigned int> indices;
+//     vector<Texture> textures;
 
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
-    {
-        this->vertices = vertices;
-        this->indices = indices;
-        this->textures = textures;
+//     Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
+//     {
+//         this->vertices = vertices;
+//         this->indices = indices;
+//         this->textures = textures;
 
-        setupMesh();
-    }
+//         setupMesh();
+//     }
 
-    void Draw(Shader &shader);
+//     void Draw(Shader &shader);
 
-    private:
-    unsigned int VAO, VBO, EBO;
+//     private:
+//     unsigned int VAO, VBO, EBO;
 
-    void setupMesh();
-}
+//     void setupMesh();
+// }
 // geometry shader to get the normal vector of the triangles
-vec GetNormalVector()
-{
-    vec3 a = vec3(gl_in[0].gl_Position) - vec3(gl_in[1].gl_Position);
-    vec3 b = vec3(gl_ins[2].gl_Position) - vec3(gl_in[1].gl_Position);
-    vec3 normal = cross(a, b);
-    return normal;
-}
+// vec GetNormalVector()
+// {
+//     vec3 a = vec3(gl_in[0].gl_Position) - vec3(gl_in[1].gl_Position);
+//     vec3 b = vec3(gl_ins[2].gl_Position) - vec3(gl_in[1].gl_Position);
+//     vec3 normal = cross(a, b);
+//     return normal;
+// }
 
 // glitchbending class to handle the model and its attributes
     // vertices = change pos based on noise threshold
     // vertex texture = change vt pos based on noise threshold. maybe try to incorporate fragshaders to give a more visual distortion effect
     // faces = faces will be deleted based on noise threshold
     
-class glitchbending
-{
-    public:
-    glitchbending();
-    void Draw(Shader &shader);
-    private:
-    vector<Model> models;
-}
+// class glitchbending
+// {
+//     public:
+//     glitchbending();
+//     void Draw(Shader &shader);
+//     private:
+//     vector<Model> models;
+// }
 
 // model class to handle the loading of the model and its attributes
 class model 
@@ -161,12 +161,7 @@ Mesh processMesh (aiMesh *mesh, const aiScene *scene)
         vector.y = mesh->mVertices[i].y;
         vector.z = mesh->mVertices[i].z;
         vertex.Position = vector;
-
-        vector.x = mesh->mNormals[i].x;
-        vector.y = mesh->mNormals[i].y;
-        vector.z = mesh->mNormals[i].z;
-        vertex.Normal = vector;
-
+\
         if(mesh->mTextureCoords[0])
         {
             glm::vec2 vec;
